@@ -12,16 +12,31 @@ from functools import wraps
 from collections import defaultdict
 
 def parse(val):
+    """
+    This function takes a value (val) as input and attempts to parse it into a float.
+    If the value is '-', it returns 0. If the value is None, it returns None.
+    If the value is a string, it removes any commas and converts it into a float.
+    If the resulting float is an integer, it returns that integer. Otherwise, it returns the float.
+    """
+
+    # If the input value is '-', return 0
     if val == '-':
         return 0
+
+    # If the input value is None, return None
     elif val is None:
         return None
 
+    # If the input value is a string, remove any commas and convert it into a float
     if isinstance(val, str):
         val = val.replace(',', '')
-    val = float(val)
+        val = float(val)
+
+    # If the resulting float is an integer, return that integer
     if val.is_integer():
         return int(val)
+
+    # Otherwise, return the float
     return val
 
 # send headers=headers on every session.get request to add a user agent to the header per https://stackoverflow.com/questions/10606133/sending-user-agent-using-requests-library-in-python
